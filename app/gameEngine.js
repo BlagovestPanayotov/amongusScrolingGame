@@ -1,9 +1,9 @@
 const btn = document.querySelector('.startBtn');
-const gameField = document.querySelector('.gameScreen');
+const gameScreen = document.querySelector('.gameScreen');
 btn.addEventListener('click', startGame);;
 
 
 function startGame() {
-    gameField.classList.remove('hidden');
+    gameScreen.classList.remove('hidden');
     btn.classList.add('hidden');
 }
