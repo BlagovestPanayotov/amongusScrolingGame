@@ -10,6 +10,7 @@ function gameLoop(state, game, timestamp) {
     const heroElement = game.hero;
     const { normalEnemyStats } = state;
 
+
     modifyHeroPosition(state, game);
 
     if (state.keys['Space']) {
@@ -37,6 +38,11 @@ function gameLoop(state, game, timestamp) {
     normalEnemies.forEach(e => {
         let positionX = parseInt(e.style.left);
 
+        //Detect collision with hero
+        if (detectCollision(e, heroElement)) {
+            state.gameOver = true;
+        }
+
         if (positionX <= 0) e.remove();
 
         e.style.left = positionX - state.normalEnemyStats.speed + 'px';
@@ -63,8 +69,11 @@ function gameLoop(state, game, timestamp) {
     heroElement.style.left = hero.positionX + 'px';
     heroElement.style.top = hero.positionY + 'px';
 
-
-    window.requestAnimationFrame(gameLoop.bind(null, state, game));
+    if (state.gameOver) {
+        alert('Game Over');
+    } else {
+        window.requestAnimationFrame(gameLoop.bind(null, state, game));
+    }
 }
 
 function modifyHeroPosition(state, game) {

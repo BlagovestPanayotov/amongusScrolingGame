@@ -1,6 +1,7 @@
 function initState() {
     const state = {
         player: 'Player 1',
+        gameOver :false,
         hero: {
             width: 50,
             height: 64,
