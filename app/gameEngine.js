@@ -12,12 +12,12 @@ function gameLoop(state, game, timestamp) {
 
     modifyHeroPosition(state, game);
 
-    if(state.keys['Space']){
+    if (state.keys['Space']) {
         heroElement.classList.remove('hero');
         heroElement.classList.add('loaded-hero');
 
-        game.createFireball(hero,state.fireballStats);
-    }else{
+        game.createFireball(hero, state.fireballStats);
+    } else {
         heroElement.classList.add('hero');
         heroElement.classList.remove('loaded-hero');
     }
@@ -28,11 +28,21 @@ function gameLoop(state, game, timestamp) {
         normalEnemyStats.nextSpawnTimestamp = timestamp + Math.random() * normalEnemyStats.maxSpawnInterval;
     }
 
+    //Render fireballs
+    document.querySelectorAll('.fireball').forEach(fb => {
+        let positionX = parseInt(fb.style.left);
+        console.log(game.gameScreen.offsetWidth);
+
+        if (positionX + parseInt(fb.style.width) >= game.gameScreen.offsetWidth) fb.remove();
+
+        fb.style.left = positionX + state.fireballStats.speed + 'px';
+    })
+
     //Render normal enemies
     document.querySelectorAll('.normal-enemy').forEach(e => {
         let positionX = parseInt(e.style.left);
 
-        if(positionX<=0)e.remove();
+        if (positionX <= 0) e.remove();
 
         e.style.left = positionX - state.normalEnemyStats.speed + 'px';
     })

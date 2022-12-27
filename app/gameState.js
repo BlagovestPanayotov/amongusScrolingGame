@@ -15,16 +15,17 @@ function initState() {
             "ArrowRight": false,
             "Space": false,
         },
-        normalEnemyStats:{
+        normalEnemyStats: {
             width: 35,
             height: 35,
             nextSpawnTimestamp: 0,
             maxSpawnInterval: 1250,
             speed: 5,
         },
-        fireballStats:{
+        fireballStats: {
             width: 30,
             height: 15,
+            speed: 10,
         }
     }
 
