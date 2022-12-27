@@ -1,7 +1,7 @@
 function start(state, game) {
     game.createHero(state.hero);
 
-    window.requestAnimationFrame(timestamp => gameLoop(state, game, timestamp));
+    window.requestAnimationFrame(gameLoop.bind(null, state, game)); //timestamp => gameLoop(state, game, timestamp)
 }
 
 
@@ -11,6 +11,14 @@ function gameLoop(state, game, timestamp) {
     const { normalEnemyStats } = state;
 
     modifyHeroPosition(state, game);
+
+    if(state.keys['Space']){
+        heroElement.classList.remove('hero');
+        heroElement.classList.add('loaded-hero');
+    }else{
+        heroElement.classList.add('hero');
+        heroElement.classList.remove('loaded-hero');
+    }
 
     //Spawn normal enemies
     if (timestamp > normalEnemyStats.nextSpawnTimestamp) {
