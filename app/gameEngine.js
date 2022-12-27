@@ -12,15 +12,25 @@ function gameLoop(state, game, timestamp) {
 
     modifyHeroPosition(state, game);
 
-    //Spawn bugs
+    //Spawn normal enemies
     if (timestamp > normalEnemyStats.nextSpawnTimestamp) {
         game.createNormalEnemy(normalEnemyStats);
         normalEnemyStats.nextSpawnTimestamp = timestamp + Math.random() * normalEnemyStats.maxSpawnInterval;
     }
 
-    //Render
+    //Render normal enemies
+    document.querySelectorAll('.normal-enemy').forEach(e => {
+        let positionX = parseInt(e.style.left);
+
+        if(positionX<=0)e.remove();
+
+        e.style.left = positionX - state.normalEnemyStats.speed + 'px';
+    })
+
+    //Render hero
     heroElement.style.left = hero.positionX + 'px';
     heroElement.style.top = hero.positionY + 'px';
+
 
     window.requestAnimationFrame(gameLoop.bind(null, state, game));
 }
