@@ -58,3 +58,10 @@ body {
     background-size: cover;
     z-index: 10;
 }
+
+.fireball {
+    position: absolute;
+    background-image: url("../images/fireball.png");
+    background-size: cover;
+    z-index: 10;
+}

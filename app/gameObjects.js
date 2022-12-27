@@ -29,10 +29,24 @@ function initGameObjects() {
 
     }
 
+    function createFireball(hero, fireballStat) {
+        const fireball = document.createElement('div');
+        fireball.classList.add('fireball');
+
+        fireball.style.width = fireballStat.width + 'px';
+        fireball.style.height = fireballStat.height + 'px';
+        fireball.style.left = hero.positionX + hero.width + 'px';
+        fireball.style.top = hero.positionY + hero.height / 3 + 'px';
+        this.fireball = fireball;
+
+        gameScreen.appendChild(fireball);
+    }
+
     return {
         gameScreen,
         startScreen,
         createHero,
         createNormalEnemy,
+        createFireball,
     }
 }

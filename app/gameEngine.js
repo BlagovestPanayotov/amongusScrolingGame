@@ -15,6 +15,8 @@ function gameLoop(state, game, timestamp) {
     if(state.keys['Space']){
         heroElement.classList.remove('hero');
         heroElement.classList.add('loaded-hero');
+
+        game.createFireball(hero,state.fireballStats);
     }else{
         heroElement.classList.add('hero');
         heroElement.classList.remove('loaded-hero');
