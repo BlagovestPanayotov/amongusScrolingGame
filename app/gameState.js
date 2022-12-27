@@ -20,12 +20,12 @@ function initState() {
             height: 35,
             nextSpawnTimestamp: 0,
             maxSpawnInterval: 1250,
-            speed: 5,
+            speed: 7,
         },
         fireballStats: {
             width: 30,
             height: 15,
-            speed: 10,
+            speed: 12,
         }
     }
 

@@ -28,23 +28,31 @@ function gameLoop(state, game, timestamp) {
         normalEnemyStats.nextSpawnTimestamp = timestamp + Math.random() * normalEnemyStats.maxSpawnInterval;
     }
 
-    //Render fireballs
-    document.querySelectorAll('.fireball').forEach(fb => {
-        let positionX = parseInt(fb.style.left);
-        console.log(game.gameScreen.offsetWidth);
-
-        if (positionX + parseInt(fb.style.width) >= game.gameScreen.offsetWidth) fb.remove();
-
-        fb.style.left = positionX + state.fireballStats.speed + 'px';
-    })
-
     //Render normal enemies
-    document.querySelectorAll('.normal-enemy').forEach(e => {
+    let normalEnemies = document.querySelectorAll('.normal-enemy');
+    normalEnemies.forEach(e => {
         let positionX = parseInt(e.style.left);
 
         if (positionX <= 0) e.remove();
 
         e.style.left = positionX - state.normalEnemyStats.speed + 'px';
+    })
+    
+    //Render fireballs
+    document.querySelectorAll('.fireball').forEach(fb => {
+        let positionX = parseInt(fb.style.left);
+
+        //Detect collision
+        normalEnemies.forEach(e=>{
+            if(detectCollision(e,fb)){
+                e.remove();
+                fb.remove();
+            }
+        })
+
+        if (positionX > game.gameScreen.offsetWidth) fb.remove();
+
+        fb.style.left = positionX + state.fireballStats.speed + 'px';
     })
 
     //Render hero
@@ -73,4 +81,17 @@ function modifyHeroPosition(state, game) {
         hero.positionX = Math.min(hero.positionX + hero.speed, gameScreen.offsetWidth - hero.width);
     }
 }
+
+function detectCollision(a, b) {
+    const first = a.getBoundingClientRect();
+    const second = b.getBoundingClientRect();
+
+    let hasCollision = !(first.top > second.bottom
+        || first.bottom < second.top
+        || first.right < second.left
+        || first.left > second.right)
+
+    return hasCollision;
+}
+
 
