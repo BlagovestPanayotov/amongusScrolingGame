@@ -26,6 +26,8 @@ function initState() {
             width: 30,
             height: 15,
             speed: 12,
+            nextSpawnTimestamp : 0,
+            maxSpawnInterval: 300,
         }
     }
 

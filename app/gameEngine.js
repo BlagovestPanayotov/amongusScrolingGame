@@ -16,7 +16,11 @@ function gameLoop(state, game, timestamp) {
         heroElement.classList.remove('hero');
         heroElement.classList.add('loaded-hero');
 
-        game.createFireball(hero, state.fireballStats);
+        if (timestamp > state.fireballStats.nextSpawnTimestamp) {
+            game.createFireball(hero, state.fireballStats);
+            state.fireballStats.nextSpawnTimestamp += state.fireballStats.maxSpawnInterval;
+        }
+
     } else {
         heroElement.classList.add('hero');
         heroElement.classList.remove('loaded-hero');
@@ -37,14 +41,14 @@ function gameLoop(state, game, timestamp) {
 
         e.style.left = positionX - state.normalEnemyStats.speed + 'px';
     })
-    
+
     //Render fireballs
     document.querySelectorAll('.fireball').forEach(fb => {
         let positionX = parseInt(fb.style.left);
 
         //Detect collision
-        normalEnemies.forEach(e=>{
-            if(detectCollision(e,fb)){
+        normalEnemies.forEach(e => {
+            if (detectCollision(e, fb)) {
                 e.remove();
                 fb.remove();
             }
