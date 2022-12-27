@@ -10,6 +10,8 @@ function gameLoop(state, game, timestamp) {
     const heroElement = game.hero;
     const { normalEnemyStats } = state;
 
+    game.scoreScreen.textContent = `${state.score} pts.`
+
 
     modifyHeroPosition(state, game);
 
@@ -57,6 +59,7 @@ function gameLoop(state, game, timestamp) {
             if (detectCollision(e, fb)) {
                 e.remove();
                 fb.remove();
+                state.score+=state.killScore;
             }
         })
 
@@ -70,8 +73,9 @@ function gameLoop(state, game, timestamp) {
     heroElement.style.top = hero.positionY + 'px';
 
     if (state.gameOver) {
-        alert('Game Over');
+        alert(`Game Over\nYou have ${state.score} pts.`);
     } else {
+        state.score += state.scoreRate;
         window.requestAnimationFrame(gameLoop.bind(null, state, game));
     }
 }

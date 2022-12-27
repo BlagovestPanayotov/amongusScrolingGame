@@ -1,6 +1,7 @@
 function initGameObjects() {
     const gameScreen = document.querySelector('.game-screen');
     const startScreen = document.querySelector('.start-button');
+    const scoreScreen = document.querySelector('.score');
 
     function createHero(stateHero) {
         const heroElement = document.createElement('div');
@@ -45,6 +46,7 @@ function initGameObjects() {
     return {
         gameScreen,
         startScreen,
+        scoreScreen,
         createHero,
         createNormalEnemy,
         createFireball,

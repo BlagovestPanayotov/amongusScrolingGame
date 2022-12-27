@@ -1,7 +1,10 @@
 function initState() {
     const state = {
         player: 'Player 1',
-        gameOver :false,
+        gameOver: false,
+        score: 0,
+        scoreRate: 1,
+        killScore:1000,
         hero: {
             width: 50,
             height: 64,
@@ -27,7 +30,7 @@ function initState() {
             width: 30,
             height: 15,
             speed: 12,
-            nextSpawnTimestamp : 0,
+            nextSpawnTimestamp: 0,
             maxSpawnInterval: 300,
         }
     }
