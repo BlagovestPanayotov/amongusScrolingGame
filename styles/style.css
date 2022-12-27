@@ -43,5 +43,11 @@ body {
     background-image: url("../images/hero.png");
     background-size: cover;
     z-index: 10;
+}
 
+.normal-enemy {
+    position: absolute;
+    background-image: url("../images/normalEnemy.png");
+    background-size: cover;
+    z-index: 10;
 }

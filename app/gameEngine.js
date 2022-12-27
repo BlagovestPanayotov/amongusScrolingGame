@@ -7,13 +7,18 @@ function start(state, game) {
 
 function gameLoop(state, game) {
     const { hero } = state;
-    const { heroElement } = game;
+    const  heroElement  = game.hero;
 
     modifyHeroPosition(state, game);
-    window.requestAnimationFrame(gameLoop.bind(null, state, game));
 
+    //Spawn bugs
+    game.createNormalEnemy(state.normalEnemyStats);
+    
+    //Render
     heroElement.style.left = hero.positionX + 'px';
     heroElement.style.top = hero.positionY + 'px';
+
+    window.requestAnimationFrame(gameLoop.bind(null, state, game));
 }
 
 function modifyHeroPosition(state, game) {

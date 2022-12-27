@@ -2,11 +2,11 @@ function initState() {
     const state = {
         player: 'Player 1',
         hero: {
-            width: 93,
-            height: 120,
+            width: 50,
+            height: 64,
             positionY: 250,
             positionX: 100,
-            speed: 5,
+            speed: 10,
         },
         keys: {
             "ArrowUp": false,
@@ -14,6 +14,13 @@ function initState() {
             "ArrowLeft": false,
             "ArrowRight": false,
             "Space": false,
+        },
+        normalEnemyStats:{
+            width: 35,
+            height: 35,
+            nextSpawnTimestamp: 0,
+            maxSpawnInterval: 1500,
+            speed: 5,
         }
     }
 
