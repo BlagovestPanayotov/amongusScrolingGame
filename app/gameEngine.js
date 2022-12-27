@@ -1,19 +1,23 @@
 function start(state, game) {
     game.createHero(state.hero);
 
-    window.requestAnimationFrame(gameLoop.bind(null, state, game));
+    window.requestAnimationFrame(timestamp => gameLoop(state, game, timestamp));
 }
 
 
-function gameLoop(state, game) {
+function gameLoop(state, game, timestamp) {
     const { hero } = state;
-    const  heroElement  = game.hero;
+    const heroElement = game.hero;
+    const { normalEnemyStats } = state;
 
     modifyHeroPosition(state, game);
 
     //Spawn bugs
-    game.createNormalEnemy(state.normalEnemyStats);
-    
+    if (timestamp > normalEnemyStats.nextSpawnTimestamp) {
+        game.createNormalEnemy(normalEnemyStats);
+        normalEnemyStats.nextSpawnTimestamp = timestamp + Math.random() * normalEnemyStats.maxSpawnInterval;
+    }
+
     //Render
     heroElement.style.left = hero.positionX + 'px';
     heroElement.style.top = hero.positionY + 'px';
